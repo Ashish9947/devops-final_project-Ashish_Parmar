@@ -1,0 +1,24 @@
+apiVersion: app/demo
+kind: Deployment
+metadata:
+  name: ashish-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ashish-app
+  template:
+    metadata:
+      labels:
+        app: ashish-app
+    spec:
+      containers:
+      - name: ashish-app
+        image: devops-fp:demo
+        resources:
+          limits: 
+            memory: "100Gi"
+            cpu: "5000m"
+        ports:
+        - containerPort: 8080
+      priorityClassName: high-priority

@@ -1,0 +1,19 @@
+---
+
+- hosts: "all"
+  become: "yes"
+
+  tasks:
+    - name: package facts
+      ansible.builtin.package_facts:
+        manager: auto
+
+    - name: install minikube
+      apt:
+        deb: "https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb"
+        state: present
+
+    - name: install kubectl
+      get_url:
+        url: "https://dl.k8s.io/release/v1.21.0/bin/linux/amd64/kubectl"
+        dest: /usr/local/bin/kubectl
